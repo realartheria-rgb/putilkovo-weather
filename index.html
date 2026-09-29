@@ -2,20 +2,48 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
-    <meta name="theme-color" content="#3b82f6" />
+    <!-- viewport-fit=cover нужен, чтобы env(safe-area-inset-*) отдавали реальные значения -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#38bdf8" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Путилково" />
-    <meta name="description" content="Премиум погодное приложение для Путилково" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
-    <link rel="manifest" href="/manifest.json" />
+    <meta name="description" content="Премиум погодное приложение для Путилково, Московская область" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+    <!-- Ссылаемся на манифест, который генерирует vite-plugin-pwa -->
+    <link rel="manifest" href="/manifest.webmanifest" />
     <title>Погода в Путилково</title>
-  </head>
+    <style>
+      /* Splash на время загрузки бандла — не мигает белым на iPhone */
+      html, body { margin: 0; background: linear-gradient(160deg, #38bdf8 0%, #7dd3fc 40%, #fde68a 100%); }
+      #splash {
+        position: fixed; inset: 0; display: flex; flex-direction: column;
+        align-items: center; justify-content: center; gap: 14px;
+        font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+        color: #0c1a2b; z-index: 9999;
+      }
+      #splash .ring {
+        width: 44px; height: 44px; border-radius: 50%;
+        border: 3px solid rgba(255,255,255,.45); border-top-color: #fff;
+        animation: spin 0.9s linear infinite;
+      }
+      #splash .t { font-size: 17px; font-weight: 600; }
+      #splash .s { font-size: 13px; opacity: .65; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+    <script type="module" crossorigin src="./assets/index-DwBQDoOb.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/state-ZTkmHHje.js">
+    <link rel="modulepreload" crossorigin href="./assets/vendor-CwipaN43.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-B4Fq_Jai.css">
+  <link rel="manifest" href="./manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="./registerSW.js"></script></head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div id="splash">
+      <div class="ring"></div>
+      <div class="t">Путилково</div>
+      <div class="s">Загружаем погоду…</div>
+    </div>
   </body>
 </html>
